@@ -13,8 +13,8 @@ keywords = [line.rstrip('\n') for line in open('keywords.txt')]
 
 for words in keywords:
     for url in search(words, num=1, start=0):
-        c.execute("SELECT url FROM url WHERE url = ?", (url,))
+        c.execute("SELECT url FROM WEBSITES WHERE url = ?", (url,))
         data=c.fetchall()
         if len(data)==0:
-            c.execute('INSERT INTO WEBSITES (url) VALUES (?)', (url))
+            c.execute('INSERT INTO WEBSITES(url) VALUES(:url)', {'url': url})
             db.commit()
