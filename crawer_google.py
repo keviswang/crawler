@@ -20,6 +20,6 @@ for words in keywords:
         if len(data)==0:
             c.execute('INSERT INTO WEBSITES(url) VALUES(:url)', {'url': url})
             print('新录入网址：' + url)
-            count ++
+            count = count + 1
             print('当前已经录入：' + count + '个')
             db.commit()

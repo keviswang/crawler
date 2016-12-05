@@ -58,7 +58,7 @@ def get_page(url, user_agent=None):
         response.close()
         cookie_jar.save()
         return html
-    Exception:
+    except Exception:
         pass
     return None
 
