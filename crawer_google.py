@@ -15,6 +15,11 @@ for words in keywords:
     for url in search(words, num=1, start=0):
         c.execute("SELECT url FROM WEBSITES WHERE url = ?", (url,))
         data=c.fetchall()
+        c.execute("SELECT count(url) FROM WEBSITES")
+        count = c.fetchone()[0]
         if len(data)==0:
             c.execute('INSERT INTO WEBSITES(url) VALUES(:url)', {'url': url})
+            print('新录入网址：' + url)
+            count ++
+            print('当前已经录入：' + count + '个')
             db.commit()
