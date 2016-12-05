@@ -48,15 +48,19 @@ def get_random_user_agent():
 def get_page(url, user_agent=None):
     if user_agent is None:
         user_agent = USER_AGENT
-    request = Request(url)
-    request.add_header('User-Agent', USER_AGENT)
-    cookie_jar.add_cookie_header(request)
-    response = urlopen(request)
-    cookie_jar.extract_cookies(response, request)
-    html = response.read()
-    response.close()
-    cookie_jar.save()
-    return html
+    try:
+        request = Request(url)
+        request.add_header('User-Agent', USER_AGENT)
+        cookie_jar.add_cookie_header(request)
+        response = urlopen(request)
+        cookie_jar.extract_cookies(response, request)
+        html = response.read()
+        response.close()
+        cookie_jar.save()
+        return html
+    Exception:
+        pass
+    return None
 
 def filter_result(link):
     try:
